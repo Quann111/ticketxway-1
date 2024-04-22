@@ -1,0 +1,128 @@
+<div class="clear-session-link" id="clear-session-wrapper" style="display: flex;flex-direction: column; justify-content: center; margin-top: 20px;margin-bottom: 20px;">
+  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">Quay lại trang Nhập dữ liệu </a>
+  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">(DÒNG CHỮ NÀY SẼ KHÔNG HIỆN RA KHI IN )</a>
+</div>
+{% load static %}
+{% for ticket in ticket_data %}
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vé Sunworld Hạ Long</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+      <div class="header">
+        <img class="img1" src="{% static 'image/Capture.PNG' %}" alt="Logo Sunworld">
+        <img class="img2" src="{% static 'image/Capture3.PNG' %}" alt="Logo công ty">
+      </div>
+      <div class="main">
+        <div style="display: flex; justify-content: center;  border-bottom: 2px dashed #000000;">
+          <div class="header2">
+            <div class="textheader1">Vé Sunworld Hạ Long</div>
+            <div style="display:flex ;font-size: 6.5px;margin: 0 auto;">
+              <div class="textheader2">Mã đặt chỗ:</div>
+              <div style="text-transform: uppercase ;font-weight: bold;margin-left: 2px;" class="textheader2">
+                XWAY{{ ticket.booking_code }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="QR"
+          style="border-bottom: 2px dashed #000000;height:101px;display: flex;justify-content: space-between;align-items: center;">
+          <div style="display: flex; align-items: center; flex-direction: column;padding-left: 18px;">
+            <img class="imgQR" src="data:image/png;base64,{{ ticket.qr_code }}">
+            <span style="font-size: 10px;">{{ ticket.code1 }}</span>
+          </div>
+          <div style="padding-right: 5px;display: flex;flex-direction: column;align-items: self-end;">
+            <div
+              style=" display: flex;font-size: 12px;margin-block-start: 10px;padding-bottom: 16px;font-weight: normal;">{{ ticket.ticket_name }}</div>
+            <div style="display: flex;flex-direction: row;justify-content: space-between;   margin-bottom: 11px;">
+              <div style="display: flex;flex-direction: column;margin-right: 1px;display: flex;flex-direction: column;align-items: self-end;margin-right: 12px;font-size: 12px;">
+                <div style="margin-bottom: 5px;">
+                  Giá vé:
+                </div>
+                <div>
+                  Ngày xuất vé:
+                </div>
+              </div>
+              <div style="    display: flex;flex-direction: column;align-items: self-end; margin-left: 6px;font-weight: bold;">
+                <div style="display: flex;flex-direction: column;margin-bottom: 5px;">
+                  {{ ticket.ticket_price }} VND
+                </div>
+                <div>
+                  {{ ticket.ticket_date }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-left: 6px;margin-right: 6px;">
+  
+          <div class="huong-dan-su-dung">
+            <span style=" font-size: 14px; font-weight: bolder;padding-bottom: 6px;">Hướng dẫn sử dụng</span>
+            <div style="font-weight: unset;margin-top: 2px;">- Vui lòng trình mã QR tại cổng vào.</div>
+            <div style="font-weight: unset;">Giữ vé suốt hành trình để kiểm soát vé.</>
+            </div>
+            <div class="huong-dan-su-dung2">
+              <div style=" font-size: 12px; font-weight: bolder;padding-bottom: 0px;">Hạn sử dụng: (01/01 - 31/12/2024)
+              </div>
+              <div style="font-weight: unset;margin-top: 2px;">Giờ mở cửa:</div>
+              <div style="font-weight: unset;margin-top: 2px;"><span>T2-T6</span> (<span>14h00 - 20h00</span>)</div>
+              <div style="font-weight: unset;margin-top: 2px;"><span>T7-CN</span> (<span>9h00 - 20h00</span>)</div>
+            </div>
+            <div class="luu-y">
+              <div style=" font-size: 14px; font-weight: bolder;padding-bottom: 0px;">Lưu ý</div>
+              <div style="margin-left: 4px;">- Mỗi mã QR chỉ được sử dụng một lần nên hãy chú ý bảo mật mã QR của bạn.
+              </div>
+              <div style="margin-left: 4px;">- Vé đã mua không được hoàn hủy.</div><span></span>
+              <div style="font-weight: bolder;margin-left: 4px;"><span style="font-weight: normal;">-</span> Miễn phí cho
+                trẻ em có chiều cao dưới 1m.</div>
+              <div><span style="font-weight: bolder;">GHI CHÚ</span> Quý Khách vui lòng đọc và thực hiện đầy đủ nội quy,
+                quy định, hướng dẫn của Khu Vui Chơi được niêm yết tại Khu Vui Chơi hoặc trên trang/kênh bán hàng trực
+                tuyến</div>
+              <span><a href="https://dulichhalongtour.com/" style="color: blue">dulichhalongtour.com</a></span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex;flex-direction: column;margin-top: 10px;">
+          <div
+            style=" border-top: 2px dashed #000000;height: 30px;display: flex;padding: 8px;align-items: center;flex-direction: column;font-weight: bold;">
+            <span>CÔNG TY TNHH THƯƠNG MẠI VÀ DỊCH VỤ</span>
+            <span>DU LỊCH XWAY HẠ LONG</span>
+
+            <span>Hotline: 098.5476.888</span>
+          </div>
+          <div style="margin-right: 5px; display: flex; margin-left: auto; font-weight: bolder;">
+            {{ forloop.counter }}/{{ ticket_data|length }}
+          </div> </div>
+      </div>
+      <div style="height: 10px; background-color: #E6E6E6;" ></div>
+      
+  
+  
+</body>
+
+</html>
+{% endfor %}
+{% comment %} <script>
+  setTimeout(function() {
+    location.reload();
+  }, 120000);
+</script> {% endcomment %}
+
+<style>
+  @media print {
+    #clear-session-wrapper {
+      display: none;
+    }
+  }
+</style>
+
+

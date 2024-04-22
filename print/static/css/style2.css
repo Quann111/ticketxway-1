@@ -1,0 +1,46 @@
+body {
+  height: 500px;
+  width: 300px;
+  margin: auto;
+  font-style: normal;
+  padding-top: 20px;
+
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+  background-color: #f1f1f1;
+  width: 500px;
+  box-shadow: 10px 5px 5px red;
+
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+
+}

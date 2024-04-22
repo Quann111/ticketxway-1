@@ -1,0 +1,93 @@
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <a href="{% url 'clear_session' %}" class="clear-session-link">Quay lại trang nhập dữ liệu</a>
+</div>
+<style>
+    .clear-session-link {
+        color: blue;
+        text-decoration: underline;
+    }
+</style>
+{% load static %}
+
+<form method="post" action="{% url 'select_tickets' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style3.css' %}">
+
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th>Chọn</th>
+                <th>Tên vé</th>
+                <th>Mã code</th>
+                <th>Mã đặt chỗ</th>
+                <th>Giá vé</th>
+                <th>Ngày xuất vé</th>
+                <th>Code2</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, ticket in enumerated_tickets %}
+            <tr>
+                <td>
+                    <input type="checkbox" name="selected_tickets" value="{{ index }}">
+                </td>
+                <td>{{ ticket.ticket_name }}</td>
+                <td>****{{ ticket.code1|slice:"-4:" }}</td>
+                <td>{{ ticket.booking_code }}</td>
+                <td>{{ ticket.ticket_price }}</td>
+                <td>{{ ticket.ticket_date }}</td>
+                <td>****{{ ticket.code2|slice:"-4:" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <button type="submit">Chọn và Import</button>
+
+</form>
+
+<script>
+    // Lấy danh sách tất cả các checkbox
+    const checkboxes = document.querySelectorAll('input[name="selected_tickets"]');
+
+    // Lấy nút "Chọn tất cả"
+    const selectAllButton = document.createElement('button');
+    selectAllButton.textContent = 'Chọn tất cả';
+    selectAllButton.addEventListener('click', () => {
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = true;
+        });
+
+        // Cập nhật trạng thái của các checkbox trong Local Storage
+        const selectedIndices = Array.from(checkboxes).map(checkbox => checkbox.value);
+        localStorage.setItem('selectedTickets', JSON.stringify(selectedIndices));
+    });
+
+    // Thêm nút "Chọn tất cả" vào form
+    const form = document.querySelector('form');
+    form.insertBefore(selectAllButton, form.firstChild);
+
+    // Kiểm tra xem Local Storage có dữ liệu không
+    if (localStorage.getItem('selectedTickets')) {
+        // Lấy dữ liệu từ Local Storage
+        const selectedTickets = JSON.parse(localStorage.getItem('selectedTickets'));
+
+        // Đặt lại các checkbox dựa trên dữ liệu đã lưu
+        checkboxes.forEach(checkbox => {
+            const index = checkbox.value;
+            checkbox.checked = selectedTickets.includes(index);
+        });
+    }
+
+    // Xử lý sự kiện khi gửi form
+    form.addEventListener('submit', () => {
+        // Lấy danh sách các checkbox được chọn
+        const selectedCheckboxes = Array.from(document.querySelectorAll('input[name="selected_tickets"]:checked'));
+
+        // Lấy chỉ số của các checkbox được chọn
+        const selectedIndices = selectedCheckboxes.map(checkbox => checkbox.value);
+
+        // Lưu dữ liệu vào Local Storage
+        localStorage.setItem('selectedTickets', JSON.stringify(selectedIndices));
+    });
+</script>
